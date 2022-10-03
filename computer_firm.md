@@ -113,3 +113,70 @@ Select avg(speed) from pc
 Select avg(speed) from laptop
 where price > 1000
 ```
+
+### 13
+Найдите среднюю скорость ПК, выпущенных производителем A.
+
+```SQL
+Select avg(speed) from PC join product on product.model = PC.model 
+where maker = 'A'
+```
+
+### 15
+Найдите размеры жестких дисков, совпадающих у двух и более PC. Вывести: HD.
+
+```SQL
+Select hd from PC 
+group by (hd) 
+having count(model) >=2
+```
+
+### 16
+Найдите пары моделей PC, имеющих одинаковые скорость и RAM. В результате каждая пара указывается только один раз, т.е. (i,j), но не (j,i), Порядок вывода: модель с большим номером, модель с меньшим номером, скорость и RAM.
+
+```SQL
+SELECT DISTINCT p1.model, p2.model, p1.speed, p1.ram
+FROM pc p1, pc p2
+WHERE p1.speed = p2.speed AND p1.ram = p2.ram AND p1.model > p2.model
+```
+
+### 17
+Найдите модели ПК-блокнотов, скорость которых меньше скорости каждого из ПК. 
+Вывести: type, model, speed.
+
+```SQL
+SELECT DISTINCT type, product.model, laptop.speed FROM product JOIN laptop ON product.model = laptop.model
+WHERE laptop.speed < ALL (SELECT speed from PC)
+```
+
+### 18
+Найдите производителей самых дешевых цветных принтеров. Вывести: maker, price.
+
+```SQL
+SELECT DISTINCT pro.maker, pri.price 
+FROM product pro join printer pri ON pro.model = pri.model
+WHERE pri.color = 'y' and pri.price = (SELECT MIN (pri2.price)
+FROM printer pri2
+WHERE pri2.color = 'y')
+```
+
+### 19
+Для каждого производителя, имеющего модели в таблице Laptop, найдите средний размер экрана выпускаемых им ПК-блокнотов. 
+Вывести: maker, средний размер экрана.
+
+```SQL
+SELECT pro.maker, AVG (lap.screen) 
+FROM product pro JOIN laptop lap ON pro.model = lap.model
+GROUP BY pro.maker
+```
+
+### 20
+Найдите производителей, выпускающих по меньшей мере три различных модели ПК. Вывести: Maker, число моделей ПК.
+
+```SQL
+SELECT maker, COUNT(model)
+FROM product
+WHERE type = 'pc'
+GROUP BY product.maker
+HAVING COUNT  (model) > 2
+```
