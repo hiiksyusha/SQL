@@ -56,5 +56,7 @@ SELECT DISTINCT Source.Date, Source.Source, Source.Campaign, Source.Ad, SUM(Clic
 		WHERE month(Source.Date) = month(CURDATE()) 
 		AND year (Source.Date) = year(CURDATE())
 		GROUP BY Source.Date, Source.Source, Source.Campaign, Source.Ad;
-    ```
-Время выполнения: 0.00365000.
+```
+
+Время выполнения: 0.00242300.
+    
