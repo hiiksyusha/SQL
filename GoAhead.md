@@ -32,6 +32,8 @@ SUM(purchase) over (partition by t1.Date, t1.Source, t1.Campaign, t1.Ad) as SUM_
 ```
 Время выполнения: 0.01165000.
 
+Решение через group by.
+
 ```SQL
 SELECT DISTINCT Source.Date, Source.Source, Source.Campaign, Source.Ad, SUM(Click), SUM(Cost), SUM(install), SUM(purchase)
  FROM source
