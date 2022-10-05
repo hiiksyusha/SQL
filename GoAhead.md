@@ -20,7 +20,7 @@ WITH t1 AS (
            		AND (Source.Campaign = Source_B.Campaign) 
             		AND (Source.ad = Source_B.Ad)) 
 
-SELECT DISTINСT t1.Date,
+SELECT DISTINCT t1.Date,
 t1.Source,
 t1.Campaign,
 t1.Ad,
