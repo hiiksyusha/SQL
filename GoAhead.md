@@ -20,7 +20,7 @@ WITH t1 AS (
            		AND (Source.Campaign = Source_B.Campaign) 
             		AND (Source.ad = Source_B.Ad)) 
 
-SELECT DISTINCT t1.Date,
+SELECT DISTINСT t1.Date,
 t1.Source,
 t1.Campaign,
 t1.Ad,
@@ -37,7 +37,7 @@ SUM(purchase) over (partition by t1.Date, t1.Source, t1.Campaign, t1.Ad) as SUM_
 Решение через group by.
 
 ```SQL
-SELECT DISTINCT Source.Date, Source.Source, Source.Campaign, Source.Ad, SUM(Click), SUM(Cost), SUM(install), SUM(purchase)
+SELECT Source.Date, Source.Source, Source.Campaign, Source.Ad, SUM(Click), SUM(Cost), SUM(install), SUM(purchase)
  FROM source
 	JOIN source_A 
 		ON (Source.Source = 'Source A') 
@@ -50,7 +50,7 @@ SELECT DISTINCT Source.Date, Source.Source, Source.Campaign, Source.Ad, SUM(Clic
 
 UNION
 
-SELECT DISTINCT Source.Date, Source.Source, Source.Campaign, Source.Ad, SUM(Click), SUM(Cost), SUM(install), SUM(purchase)
+SELECT Source.Date, Source.Source, Source.Campaign, Source.Ad, SUM(Click), SUM(Cost), SUM(install), SUM(purchase)
 	FROM source
 		JOIN source_B 
 			ON (Source.Source = 'Source B') 
