@@ -14,11 +14,11 @@ WITH t1 AS (
 			AND (Source.Ad = Source_A.Ad))
 	UNION
 	SELECT Date, Source.Source, Source.Campaign, Source.Ad, Click, Cost, install, purchase from Source_B 
-		JOIN Source 
-			ON (Source.Source = 'Source B') 
-            AND (Source.Date = date(Source_B.Datetime)) 
-            AND (Source.Campaign = Source_B.Campaign) 
-            AND (Source.ad = Source_B.Ad)) 
+		JOIN Source
+	    		ON (Source.Source = 'Source B') 
+            		AND (Source.Date = date(Source_B.Datetime)) 
+           		AND (Source.Campaign = Source_B.Campaign) 
+            		AND (Source.ad = Source_B.Ad)) 
 
 SELECT DISTINCT t1.Date,
 t1.Source,
@@ -54,9 +54,9 @@ SELECT DISTINCT Source.Date, Source.Source, Source.Campaign, Source.Ad, SUM(Clic
 	FROM source
 		JOIN source_B 
 			ON (Source.Source = 'Source B') 
-            AND (Source.Date = date(Source_B.DateTime)) 
-            AND (Source.Campaign = Source_B.Campaign) 
-            AND (Source.Ad = Source_B.Ad)
+            		AND (Source.Date = date(Source_B.DateTime)) 
+           		AND (Source.Campaign = Source_B.Campaign) 
+            		AND (Source.Ad = Source_B.Ad)
 		WHERE month(Source.Date) = month(CURDATE()) 
 		AND year (Source.Date) = year(CURDATE())
 		GROUP BY Source.Date, Source.Source, Source.Campaign, Source.Ad;
